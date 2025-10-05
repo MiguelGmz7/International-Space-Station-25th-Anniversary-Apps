@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css';
 import julietaImg from './assets/nave/Julieta.gif'
 import StarButton from './components/StarButton'
 
@@ -15,11 +15,27 @@ const TYPE_INTERVAL_MS = 60      // velocidad de escritura
 const BETWEEN_MESSAGES_MS = 2000 // tiempo visible antes de pasar al siguiente
 
 function App() {
+  const containerRef = useRef(null);
+  const [scale, setScale] = useState(1);
   const [typed, setTyped] = useState('')
   const [showBubble, setShowBubble] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [fullMessage, setFullMessage] = useState('')
   const [playing, setPlaying] = useState(false)
+
+  // Your button positions based on original image dimensions
+  const originalWidth = 1920; // Set this to your image's original width
+  const originalHeight = 1080; // Set this to your image's original height
+
+  const buttonPositions = [
+    {x: 1000, y: 225},
+    {x: 1098, y: 200},
+    {x: 1111, y:689},
+    {x: 1168, y: 417},
+    {x: 1045, y: 416},
+    {x: 1159, y:391}
+    // Add more coordinates as needed
+  ];
 
   // Inicia la secuencia al montar
   useEffect(() => {
@@ -77,20 +93,30 @@ function App() {
     setCurrentIndex(0)
   }
 
-  // Example array of coordinate points
-  const starPositions = [
-    {x: 859, y: 200},
-    {x: 956, y: 175},
-    {x: 970, y:664},
-    {x: 1027, y: 392},
-    {x: 904, y: 391},
-    {x: 1018, y:366}
-    // Add more coordinates as needed
-  ];
-
   const handleStarClick = (index) => {
     console.log(`Star ${index} clicked!`);
   };
+
+  useEffect(() => {
+    const updateScale = () => {
+      if (containerRef.current) {
+        const container = containerRef.current;
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        // Calculate scale based on aspect ratio
+        const scaleX = containerWidth / originalWidth;
+        const scaleY = containerHeight / originalHeight;
+        const newScale = Math.min(scaleX, scaleY);
+
+        setScale(newScale);
+      }
+    };
+
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   return (
     <>
@@ -118,12 +144,18 @@ function App() {
         </div>
       )}
 
-      <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
-        {starPositions.map((position, index) => (
+      <div 
+        className="buttons-container"
+        style={{
+          transform: `scale(${scale})`,
+        }}
+        ref={containerRef}
+      >
+        {buttonPositions.map((pos, index) => (
           <StarButton
             key={index}
-            x={position.x}
-            y={position.y}
+            x={pos.x}
+            y={pos.y}
             onClick={() => handleStarClick(index)}
           />
         ))}
