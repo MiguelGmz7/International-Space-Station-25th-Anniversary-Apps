@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import julietaImg from './assets/nave/Julieta.gif'
+import julietaFullBody from './assets/Customize/JulietaFullBody.png'
+import globeImg from './assets/Customize/Globo.png'
+import bookImg from './assets/Customize/Libro.png'
 
 // Párrafos hardcodeados (en inglés) y en orden
 const TEXTS = [
@@ -19,6 +22,16 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [fullMessage, setFullMessage] = useState('')
   const [playing, setPlaying] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [globeApplied, setGlobeApplied] = useState(false)
+  const [bookApplied, setBookApplied] = useState(false)
+
+  // Cerrar modal con Escape
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setIsModalOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   // Inicia la secuencia al montar
   useEffect(() => {
@@ -72,8 +85,11 @@ function App() {
 
   // Reinicia la secuencia al hacer clic en el avatar
   const handleAvatarClick = () => {
-    setPlaying(true)
-    setCurrentIndex(0)
+    setIsModalOpen(true)
+    setPlaying(false)
+    setShowBubble(false)
+    setGlobeApplied(false)
+    setBookApplied(false)
   }
 
   return (
@@ -90,7 +106,9 @@ function App() {
           if (e.key === 'Enter' || e.key === ' ') handleAvatarClick()
         }}
       >
-        <img src={julietaImg} alt="Personaje Julieta" />
+        <div className="avatar-inner">
+          <img src={julietaImg} alt="Personaje Julieta" />
+        </div>
       </div>
 
       {showBubble && (
@@ -99,6 +117,54 @@ function App() {
             {typed}
             <span className="caret" aria-hidden="true">▏</span>
           </span>
+        </div>
+      )}
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" aria-label="Cerrar" onClick={() => setIsModalOpen(false)}>×</button>
+            <div className="modal-body">
+              <img src={julietaFullBody} alt="Personaje Julieta" className="modal-character" />
+
+              {/* Libro lado izquierdo */}
+              {!bookApplied && (
+                <img
+                  src={bookImg}
+                  alt="Libro"
+                  className="modal-book"
+                  onClick={() => setBookApplied(true)}
+                />
+              )}
+
+              {/* Globo lado derecho */}
+              {!globeApplied && (
+                <img
+                  src={globeImg}
+                  alt="Globo terráqueo"
+                  className="modal-globe"
+                  onClick={() => setGlobeApplied(true)}
+                />
+              )}
+
+              {/* Aplicados encima del personaje (misma posición) */}
+              {globeApplied && (
+                <img
+                  src={globeImg}
+                  alt="Globo aplicado"
+                  className="globe-applied"
+                  onClick={() => setGlobeApplied(false)}
+                />
+              )}
+              {bookApplied && (
+                <img
+                  src={bookImg}
+                  alt="Libro aplicado"
+                  className="book-applied"
+                  onClick={() => setBookApplied(false)}
+                />
+              )}
+            </div>
+          </div>
         </div>
       )}
     </>
