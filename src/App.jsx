@@ -4,6 +4,7 @@ import julietaImg from './assets/nave/Julieta.gif'
 import SimpleModal from './components/SimpleModal.jsx'
 import ISSModal from './components/ISSModal.jsx'
 import StarButton from './components/StarButton'
+import Star2Content from './components/Star2Content.jsx'
 import popup2 from './assets/PopUps/2.jpg'
 
 // Párrafos hardcodeados (en inglés) y en orden
@@ -116,10 +117,8 @@ function App() {
 
   const handleStarClick = (index) => {
     const humanIndex = index + 1;
-    const label = `Star ${humanIndex} clicked!`;
-    console.log(label);
+    console.log(`Star ${humanIndex} clicked!`);
     setSelectedStarIndex(humanIndex);
-    setSelectedStarLabel(label);
     setIsSimpleOpen(true);
   };
 
@@ -184,39 +183,12 @@ function App() {
         />
       )}
       {isSimpleOpen && (
-        <SimpleModal open={isSimpleOpen} onClose={() => setIsSimpleOpen(false)} ariaLabel={selectedStarLabel || 'Star modal'}>
-          <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-            {selectedStarIndex === 2 && (
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundImage: `url(${popup2})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                zIndex: 0,
-                border: '6px solid rgba(255,255,255,0.85)',
-                boxSizing: 'border-box'
-              }} />
-            )}
-            <span style={{
-              position: 'absolute',
-              left: '50%',
-              top: '8%',
-              transform: 'translateX(-50%)',
-              display: 'inline-block',
-              padding: '6px 12px',
-              borderRadius: '10px',
-              fontFamily: 'Press Start 2P, system-ui, sans-serif',
-              fontSize: '28px',
-              color: '#111',
-              background: selectedStarIndex === 2 ? 'rgba(255,255,255,0.8)' : 'transparent',
-              textShadow: selectedStarIndex === 2 ? '0 1px 2px rgba(0,0,0,0.25)' : 'none',
-              zIndex: 10
-            }}>
-              {selectedStarLabel}
-            </span>
-          </div>
+        <SimpleModal open={isSimpleOpen} onClose={() => setIsSimpleOpen(false)} ariaLabel={'Star modal'}>
+          {selectedStarIndex === 2 ? (
+            <Star2Content />
+          ) : (
+            <div style={{ width: '100%', height: '100%' }} />
+          )}
         </SimpleModal>
       )}
 
