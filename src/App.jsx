@@ -30,10 +30,10 @@ function App() {
   const buttonPositions = [
     {x: 1000, y: 225},
     {x: 1098, y: 200},
-    {x: 1111, y:689},
-    {x: 1168, y: 417},
+    {x: 1111, y: 760},
+    {x: 1190, y: 475},
     {x: 1045, y: 416},
-    {x: 1159, y:391}
+    {x: 1175, y:420}
     // Add more coordinates as needed
   ];
 
