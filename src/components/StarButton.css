@@ -1,0 +1,42 @@
+.star-button {
+  /* Remove absolute positioning to make it flexible */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star-button:active,
+.star-button:focus {
+  outline: none;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star-button::-moz-focus-inner {
+  border: 0;
+}
+
+.star-icon {
+  display: block;
+  font-size: 30px;
+  color: #FFD700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.star-button:hover .star-icon {
+  color: #FFA500;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.7);
+}
