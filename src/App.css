@@ -15,7 +15,7 @@
 }
 
 
-/* Avatar circular con más margen de la esquina */
+/* Avatar circular con más margen de la esquina y animación tipo videojuego */
 .avatar {
   position: fixed;
   bottom: 40px;  /* separado del borde inferior */
@@ -31,13 +31,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* Parámetros ajustables de la imagen dentro del círculo */
+  --img-size: 90%;   /* cambia este valor para hacerla más grande/pequeña */
+  --img-pos-x: 50%;   /* posición horizontal del encuadre */
+  --img-pos-y: 50%;   /* posición vertical del encuadre */
+
+  /* Animación de aparición retro: escala por pasos */
+  transform: scale(0);
+  opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: avatar-pop 800ms steps(8, end) 150ms forwards;
 }
 
 .avatar img {
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
-  object-position: center;
+  width: var(--img-size);
+  height: var(--img-size);
+  object-fit: cover; /* permite que se "lo coma" el círculo */
+  object-position: var(--img-pos-x) var(--img-pos-y);
   border-radius: 50%;
 }
 
@@ -96,4 +108,30 @@
 @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
+}
+
+/* Animación de aparición del avatar en estilo retro */
+@keyframes avatar-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+    filter: contrast(120%) saturate(120%);
+  }
+  40% {
+    transform: scale(0.6);
+    opacity: 0.9;
+    filter: contrast(140%) saturate(140%);
+  }
+  60% {
+    transform: scale(1.05); /* pequeño overshoot para sensación elástica retro */
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.98); /* rebote */
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: none;
+  }
 }
