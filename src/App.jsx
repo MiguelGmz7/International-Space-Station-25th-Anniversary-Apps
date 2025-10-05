@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import julietaImg from './assets/nave/Julieta.png'
+import julietaImg from './assets/nave/Julieta.gif'
 
 // Párrafos hardcodeados (en inglés) y en orden
 const TEXTS = [
