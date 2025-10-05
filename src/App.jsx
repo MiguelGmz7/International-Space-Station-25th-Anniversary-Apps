@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import julietaImg from './assets/nave/Julieta.gif'
-import julietaFullBody from './assets/Customize/JulietaFullBody.png'
-import globeImg from './assets/Customize/Globo.png'
-import bookImg from './assets/Customize/Libro.png'
+import SimpleModal from './components/SimpleModal.jsx'
+import ISSModal from './components/ISSModal.jsx'
 
 // Párrafos hardcodeados (en inglés) y en orden
 const TEXTS = [
@@ -23,8 +22,10 @@ function App() {
   const [fullMessage, setFullMessage] = useState('')
   const [playing, setPlaying] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSimpleOpen, setIsSimpleOpen] = useState(false)
   const [globeApplied, setGlobeApplied] = useState(false)
   const [bookApplied, setBookApplied] = useState(false)
+  const [starApplied, setStarApplied] = useState(false)
 
   // Cerrar modal con Escape
   useEffect(() => {
@@ -90,6 +91,7 @@ function App() {
     setShowBubble(false)
     setGlobeApplied(false)
     setBookApplied(false)
+    setStarApplied(false)
   }
 
   return (
@@ -119,53 +121,22 @@ function App() {
           </span>
         </div>
       )}
+      <button style={{position:'fixed', top:20, left:20, zIndex:3000}} onClick={() => setIsSimpleOpen(true)}>Abrir modal simple</button>
       {isModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-          <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" aria-label="Cerrar" onClick={() => setIsModalOpen(false)}>×</button>
-            <div className="modal-body">
-              <img src={julietaFullBody} alt="Personaje Julieta" className="modal-character" />
-
-              {/* Libro lado izquierdo */}
-              {!bookApplied && (
-                <img
-                  src={bookImg}
-                  alt="Libro"
-                  className="modal-book"
-                  onClick={() => setBookApplied(true)}
-                />
-              )}
-
-              {/* Globo lado derecho */}
-              {!globeApplied && (
-                <img
-                  src={globeImg}
-                  alt="Globo terráqueo"
-                  className="modal-globe"
-                  onClick={() => setGlobeApplied(true)}
-                />
-              )}
-
-              {/* Aplicados encima del personaje (misma posición) */}
-              {globeApplied && (
-                <img
-                  src={globeImg}
-                  alt="Globo aplicado"
-                  className="globe-applied"
-                  onClick={() => setGlobeApplied(false)}
-                />
-              )}
-              {bookApplied && (
-                <img
-                  src={bookImg}
-                  alt="Libro aplicado"
-                  className="book-applied"
-                  onClick={() => setBookApplied(false)}
-                />
-              )}
-            </div>
-          </div>
-        </div>
+        <ISSModal
+          globeApplied={globeApplied}
+          setGlobeApplied={setGlobeApplied}
+          bookApplied={bookApplied}
+          setBookApplied={setBookApplied}
+          starApplied={starApplied}
+          setStarApplied={setStarApplied}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+      {isSimpleOpen && (
+        <SimpleModal open={isSimpleOpen} onClose={() => setIsSimpleOpen(false)}>
+          {/* Modal en blanco. Puedes poner contenido aquí si quieres. */}
+        </SimpleModal>
       )}
     </>
   )

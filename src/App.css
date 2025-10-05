@@ -124,6 +124,28 @@
   transform: scale(1.12); /* se agranda al pasar el mouse */
 }
 
+/* Fondo aplicado al contenedor del modal cuando se seleccionan estrellas */
+.star-bg {
+  background-size: cover;      /* cubre todo el contenedor */
+  background-position: center; /* centrado */
+  background-repeat: no-repeat;
+}
+
+/* Icono de estrellas en el modal, debajo del libro (interactivo) */
+.modal-star {
+  position: absolute;
+  left: 6px;
+  top: 60%; /* más arriba para que no lo coma el borde del modal */
+  width: 24%;
+  max-width: 260px;
+  object-fit: contain;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.modal-star:hover { transform: scale(1.12); }
+
 /* Globo aplicado encima del personaje (interactivo) */
 .globe-applied {
   position: absolute;
