@@ -24,8 +24,8 @@
   height: 220px;
   border-radius: 50%;
   overflow: hidden;
-  border: 6px solid #ffffff;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  box-sizing: border-box;
   background: #fff;
   backdrop-filter: blur(2px);
   display: flex;
@@ -33,9 +33,9 @@
   justify-content: center;
 
   /* Parámetros ajustables de la imagen dentro del círculo */
-  --img-size: 90%;   /* cambia este valor para hacerla más grande/pequeña */
+  --img-size: 80%;   /* cambia este valor para hacerla más grande/pequeña */
   --img-pos-x: 50%;   /* posición horizontal del encuadre */
-  --img-pos-y: 50%;   /* posición vertical del encuadre */
+  --img-pos-y: 100%;   /* posición vertical del encuadre */
 
   /* Animación de aparición retro: escala por pasos */
   transform: scale(0);
@@ -46,11 +46,10 @@
 }
 
 .avatar img {
-  width: var(--img-size);
   height: var(--img-size);
   object-fit: cover; /* permite que se "lo coma" el círculo */
-  object-position: var(--img-pos-x) var(--img-pos-y);
-  border-radius: 50%;
+  object-position: var(--img-pos-x) 0;
+  margin-top: 32px;
 }
 
 /* Globo de texto pixeleado, con más separación del borde y del avatar */
