@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -22,12 +28,22 @@ a:hover {
   color: #535bf2;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden; /* evitar scroll */
+}
+
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('./assets/nave/ISS.png');
+  background-size: contain;           /* mostrar completa sin recortes */
+  background-position: 50% center;    /* mover un poco más a la izquierda */
+  background-repeat: no-repeat;
+  background-color: #000;
 }
 
 h1 {
@@ -56,13 +72,14 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #ffffff;
+    background-color: transparent;
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
   }
 }
