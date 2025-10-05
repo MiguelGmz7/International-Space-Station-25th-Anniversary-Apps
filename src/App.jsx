@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import julietaImg from './assets/nave/Julieta.gif'
+import StarButton from './components/StarButton'
 
 // Párrafos hardcodeados (en inglés) y en orden
 const TEXTS = [
@@ -76,9 +77,13 @@ function App() {
     setCurrentIndex(0)
   }
 
+  const handleStarClick = () => {
+    console.log('Star clicked!');
+  };
+
   return (
     <>
-      <main className="hero" aria-label="Fondo ISS" />
+      <main className="/* Remove all button styling */hero" aria-label="Fondo ISS" />
 
       <div
         className="avatar"
@@ -101,6 +106,8 @@ function App() {
           </span>
         </div>
       )}
+
+      <StarButton onClick={handleStarClick} />
     </>
   )
 }
