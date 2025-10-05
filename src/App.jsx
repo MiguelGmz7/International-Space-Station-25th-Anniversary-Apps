@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import julietaImg from './assets/nave/Julieta.gif'
+import SimpleModal from './components/SimpleModal.jsx'
+import ISSModal from './components/ISSModal.jsx'
 import StarButton from './components/StarButton'
 
 // Párrafos hardcodeados (en inglés) y en orden
@@ -20,6 +22,18 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [fullMessage, setFullMessage] = useState('')
   const [playing, setPlaying] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSimpleOpen, setIsSimpleOpen] = useState(false)
+  const [globeApplied, setGlobeApplied] = useState(false)
+  const [bookApplied, setBookApplied] = useState(false)
+  const [starApplied, setStarApplied] = useState(false)
+
+  // Cerrar modal con Escape
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setIsModalOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   // Inicia la secuencia al montar
   useEffect(() => {
@@ -73,8 +87,12 @@ function App() {
 
   // Reinicia la secuencia al hacer clic en el avatar
   const handleAvatarClick = () => {
-    setPlaying(true)
-    setCurrentIndex(0)
+    setIsModalOpen(true)
+    setPlaying(false)
+    setShowBubble(false)
+    setGlobeApplied(false)
+    setBookApplied(false)
+    setStarApplied(false)
   }
 
   // Example array of coordinate points
@@ -106,7 +124,9 @@ function App() {
           if (e.key === 'Enter' || e.key === ' ') handleAvatarClick()
         }}
       >
-        <img src={julietaImg} alt="Personaje Julieta" />
+        <div className="avatar-inner">
+          <img src={julietaImg} alt="Personaje Julieta" />
+        </div>
       </div>
 
       {showBubble && (
@@ -117,17 +137,6 @@ function App() {
           </span>
         </div>
       )}
-
-      <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
-        {starPositions.map((position, index) => (
-          <StarButton
-            key={index}
-            x={position.x}
-            y={position.y}
-            onClick={() => handleStarClick(index)}
-          />
-        ))}
-      </div>
     </>
   )
 }

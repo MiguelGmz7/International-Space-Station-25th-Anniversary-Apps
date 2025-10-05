@@ -3,4 +3,8 @@ export default {
     '@tailwindcss/postcss': {},
     autoprefixer: {},
   },
+  plugins: {
+    "@tailwindcss/postcss": {},
+    autoprefixer: {},
+  },
 };
