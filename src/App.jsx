@@ -77,8 +77,19 @@ function App() {
     setCurrentIndex(0)
   }
 
-  const handleStarClick = () => {
-    console.log('Star clicked!');
+  // Example array of coordinate points
+  const starPositions = [
+    {x: 859, y: 200},
+    {x: 956, y: 175},
+    {x: 970, y:664},
+    {x: 1027, y: 392},
+    {x: 904, y: 391},
+    {x: 1018, y:366}
+    // Add more coordinates as needed
+  ];
+
+  const handleStarClick = (index) => {
+    console.log(`Star ${index} clicked!`);
   };
 
   return (
@@ -107,10 +118,16 @@ function App() {
         </div>
       )}
 
-      <StarButton 
-        onClick={() => handleStarClick(2)}
-        style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-      />
+      <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
+        {starPositions.map((position, index) => (
+          <StarButton
+            key={index}
+            x={position.x}
+            y={position.y}
+            onClick={() => handleStarClick(index)}
+          />
+        ))}
+      </div>
     </>
   )
 }
