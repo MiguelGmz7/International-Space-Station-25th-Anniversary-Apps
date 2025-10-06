@@ -170,7 +170,7 @@ function App() {
           </span>
         </div>
       )}
-      <button style={{position:'fixed', top:20, left:20, zIndex:3000}} onClick={() => setIsSimpleOpen(true)}>Abrir modal simple</button>
+      <button style={{position:'fixed', top:20, left:20, zIndex:3000}} onClick={() => window.open('/project/ksp.html', '_blank', 'noopener,noreferrer')}>Inmersive Experience</button>
       {isModalOpen && (
         <ISSModal
           globeApplied={globeApplied}
