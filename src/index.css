@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -22,12 +24,22 @@ a:hover {
   color: #535bf2;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden; /* evitar scroll */
+}
+
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('./assets/nave/ISS.png');
+  background-size: contain;           /* mostrar completa sin recortes */
+  background-position: 50% center;    /* mover un poco más a la izquierda */
+  background-repeat: no-repeat;
+  background-color: #000;
 }
 
 h1 {
@@ -54,15 +66,64 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* .star-button {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+} 
+
+
+.star-button:active,
+.star-button:focus {
+  outline: none;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star-button::-moz-focus-inner {
+  border: 0;
+}
+
+.star-icon {
+  display: block;
+  font-size: 30px;
+  color: #FFD700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.star-button:hover .star-icon {
+  color: #FFA500;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.7);
+} */
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #ffffff;
+    background-color: transparent;
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
   }
 }
