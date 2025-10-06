@@ -16,12 +16,12 @@ function Star2Content() {
   const [typedText, setTypedText] = useState('')
 
   useEffect(() => {
-    const fullText = messages[currentMsgIndex]
+    const fullText = messages[currentMsgIndex] || ''
     setTypedText('')
     let i = 0
     const typeInterval = setInterval(() => {
-      setTypedText(prev => prev + fullText[i])
-      i++
+      i += 1
+      setTypedText(fullText.slice(0, i))
       if (i >= fullText.length) {
         clearInterval(typeInterval)
         // Pausa al terminar una línea antes de pasar a la siguiente

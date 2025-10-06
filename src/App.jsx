@@ -5,6 +5,10 @@ import SimpleModal from './components/SimpleModal.jsx'
 import ISSModal from './components/ISSModal.jsx'
 import StarButton from './components/StarButton'
 import Star2Content from './components/Star2Content.jsx'
+import Star3Content from './components/Star3Content.jsx'
+import Star4Content from './components/Star4Content.jsx'
+import Star5Content from './components/Star5Content.jsx'
+import Star6Content from './components/Star6Content.jsx'
 import popup2 from './assets/PopUps/2.jpg'
 
 // Párrafos hardcodeados (en inglés) y en orden
@@ -170,7 +174,39 @@ function App() {
           </span>
         </div>
       )}
-      <button style={{position:'fixed', top:20, left:20, zIndex:3000}} onClick={() => window.open('/project/ksp.html', '_blank', 'noopener,noreferrer')}>Inmersive Experience</button>
+      
+      {/* Botón fijo superior izquierdo llamativo con estrellas */}
+      <style>{`
+        @keyframes twinkle { 0%, 100% { opacity: 0.9; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+      `}</style>
+      <button
+        type="button"
+        onClick={() => window.open('/project/ksp.html', '_blank', 'noopener,noreferrer')}
+        aria-label="Open immersive experience"
+        style={{
+          position: 'fixed',
+          top: 20,
+          left: 20,
+          zIndex: 3000,
+          padding: '10px 14px',
+          fontFamily: 'Press Start 2P, system-ui, sans-serif',
+          fontSize: '11px',
+          background: 'linear-gradient(135deg, #1e90ff 0%, #6a5acd 100%)',
+          color: '#fff',
+          border: '2px solid #FFD700',
+          borderRadius: '6px',
+          boxShadow: '0 0 10px rgba(255,215,0,0.7), 0 0 20px rgba(255,165,0,0.6)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          cursor: 'pointer'
+        }}
+      >
+        <span style={{ color: '#FFD700', animation: 'twinkle 1.2s ease-in-out infinite' }}>★</span>
+        Immersive Experience
+        <span style={{ color: '#FFD700', animation: 'twinkle 1.6s ease-in-out infinite' }}>★</span>
+      </button>
+      
       {isModalOpen && (
         <ISSModal
           globeApplied={globeApplied}
@@ -186,6 +222,14 @@ function App() {
         <SimpleModal open={isSimpleOpen} onClose={() => setIsSimpleOpen(false)} ariaLabel={'Star modal'}>
           {selectedStarIndex === 2 ? (
             <Star2Content />
+          ) : selectedStarIndex === 3 ? (
+            <Star3Content />
+          ) : selectedStarIndex === 4 ? (
+            <Star4Content />
+          ) : selectedStarIndex === 5 ? (
+            <Star5Content />
+          ) : selectedStarIndex === 6 ? (
+            <Star6Content />
           ) : (
             <div style={{ width: '100%', height: '100%' }} />
           )}
@@ -207,6 +251,7 @@ function App() {
             onClick={() => handleStarClick(index)}
           />
         ))}
+
       </div>
     </>
   )
