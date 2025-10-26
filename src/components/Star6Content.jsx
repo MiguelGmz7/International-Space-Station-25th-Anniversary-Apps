@@ -20,7 +20,7 @@ function Star6Content() {
   }, [])
 
   const handleOpenExperience = () => {
-    window.open('/project/ksp.html', '_blank', 'noopener,noreferrer')
+    window.open('project/ksp.html', '_blank', 'noopener,noreferrer')
   }
 
   return (

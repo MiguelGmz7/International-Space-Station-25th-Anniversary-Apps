@@ -181,7 +181,7 @@ function App() {
       `}</style>
       <button
         type="button"
-        onClick={() => window.open('/project/ksp.html', '_blank', 'noopener,noreferrer')}
+        onClick={() => window.open('project/ksp.html', '_blank', 'noopener,noreferrer')}
         aria-label="Open immersive experience"
         style={{
           position: 'fixed',
